@@ -13,6 +13,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        loadingwindow.cpp
+		loadingwindow.cpp
 
 HEADERS  += loadingwindow.h
+
+DISTFILES += splash.png
