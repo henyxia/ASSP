@@ -17,4 +17,5 @@ SOURCES += main.cpp\
 
 HEADERS  += loadingwindow.h
 
-DISTFILES += splash.png
+RESOURCES += \
+	splash.qrc

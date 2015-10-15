@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 
     // Displaying splashcreen
     QSplashScreen *splash = new QSplashScreen;
-    splash->setPixmap(QPixmap("splash.png"));
+    splash->setPixmap(QPixmap(":/images/splash"));
     splash->show();
 
     Qt::Alignment botLeft = Qt::AlignLeft | Qt::AlignBottom;
