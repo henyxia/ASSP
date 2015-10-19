@@ -12,10 +12,11 @@ TARGET = ASSP
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
-		loadingwindow.cpp
+SOURCES += main.cpp \
+    mainwindow.cpp
 
-HEADERS  += loadingwindow.h
+HEADERS  += \
+    mainwindow.h
 
 RESOURCES += \
 	splash.qrc
