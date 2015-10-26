@@ -12,7 +12,8 @@ SOURCES += main.cpp \
 
 HEADERS  += \
 	mainwindow.h \
-	logclass.h
+	logclass.h \
+    globals.h
 
 RESOURCES += \
 	splash.qrc

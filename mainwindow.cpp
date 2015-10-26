@@ -1,5 +1,6 @@
 // Includes
 #include "mainwindow.h"
+#include "globals.h"
 #include <QMessageBox>
 #include <QObject>
 
@@ -11,7 +12,6 @@ MainWindow::MainWindow()
     dockContols = NULL;
     menu = NULL;
     outputLog = NULL;
-    output = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -23,8 +23,6 @@ bool MainWindow::create()
     bool ret;
 
     mainWin = new QMainWindow();
-
-    output = new logClass();
 
     ret = initLog();
     if(!ret)
@@ -68,7 +66,7 @@ bool MainWindow::initLog()
         return false;
     }
 
-    output->printMessage(logClass::INFO, "ASSP Starting");
+    output->printMessage(logClass::INFO, "ASSP Starting\n");
 
     return true;
 }

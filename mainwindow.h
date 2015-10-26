@@ -30,7 +30,6 @@ class MainWindow
     QDockWidget*    dockContols;
     QTextEdit*      outputLog;
     QMenuBar*       menu;
-    logClass*       output;
 };
 
 #endif
