@@ -39,7 +39,7 @@ bool MainWindow::create()
 
 void MainWindow::show()
 {
-    mainWin->show();
+    mainWin->showMaximized();
 }
 
 bool MainWindow::initLog()
