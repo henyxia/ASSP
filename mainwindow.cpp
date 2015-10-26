@@ -35,19 +35,7 @@ bool MainWindow::create()
 
     viewObject = new viewclass();
 
-    /*
-    ret = viewObject->ini;
-    if(!ret)
-    {
-        QMessageBox msgB(QMessageBox::Critical, "Critical error",
-                         "Unable to create view object");
-        msgB.exec();
-        return false;
-    }*/
-
-    // Risky part
     mainWin->setCentralWidget(viewObject);
-
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
     return true;
 }
@@ -70,6 +58,8 @@ bool MainWindow::initLog()
         return false;
     }
     outputLog->setEnabled(false);
+    outputLog->setMinimumHeight(100);
+    outputLog->setMaximumHeight(100);
     output->addOutput(outputLog);
     dockLog->setWidget(outputLog);
 
