@@ -11,6 +11,7 @@ MainWindow::MainWindow()
     dockContols = NULL;
     menu = NULL;
     outputLog = NULL;
+    output = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -23,10 +24,13 @@ bool MainWindow::create()
 
     mainWin = new QMainWindow();
 
+    output = new logClass();
+
     ret = initLog();
     if(!ret)
     {
-        QMessageBox msgB(QMessageBox::Critical, "Critical error", "Unable to init log");
+        QMessageBox msgB(QMessageBox::Critical, "Critical error",
+                         "Unable to init log");
         msgB.exec();
         return false;
     }
@@ -45,17 +49,26 @@ bool MainWindow::initLog()
 
     dockLog = new QDockWidget("Log");
     outputLog = new QTextEdit();
-    //FIXME
-    // Add a creation check
-
+    if(outputLog == NULL)
+    {
+        QMessageBox msgB(QMessageBox::NoIcon, "Critical error",
+                         "Unable to create output log");
+        msgB.exec();
+        return false;
+    }
+    outputLog->setEnabled(false);
+    output->addOutput(outputLog);
     dockLog->setWidget(outputLog);
 
     if(dockLog == NULL)
     {
-        QMessageBox msgB(QMessageBox::NoIcon, "Critical error", "Unable to create log");
+        QMessageBox msgB(QMessageBox::NoIcon, "Critical error",
+                         "Unable to create log");
         msgB.exec();
         return false;
     }
+
+    output->printMessage(logClass::INFO, "ASSP Starting");
 
     return true;
 }
