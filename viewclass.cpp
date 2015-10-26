@@ -1,10 +1,10 @@
 #include "viewclass.h"
 
-viewclass::viewclass(QWidget *parent) : QOpenGLWidget(parent)//,
-    //m_xRot(0),
-    //m_yRot(0),
-    //m_zRot(0),
-    //m_program(0)
+viewclass::viewclass(QWidget *parent) : QOpenGLWidget(parent),
+    m_xRot(0),
+    m_yRot(0),
+    m_zRot(0),
+    m_program(0)
 {
 
 }
@@ -163,7 +163,8 @@ void viewclass::setupVertexAttribs()
     f->glEnableVertexAttribArray(0);
     f->glEnableVertexAttribArray(1);
     f->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
-    f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), reinterpret_cast<void *>(3 * sizeof(GLfloat)));
+    f->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat),
+                             reinterpret_cast<void *>(3 * sizeof(GLfloat)));
     m_logoVbo.release();
 }
 

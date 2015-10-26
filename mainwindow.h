@@ -8,6 +8,7 @@
 #include <QMenuBar>
 #include <QTextEdit>
 #include "logclass.h"
+#include "viewclass.h"
 
 // Class
 class MainWindow
@@ -30,6 +31,7 @@ class MainWindow
     QDockWidget*    dockContols;
     QTextEdit*      outputLog;
     QMenuBar*       menu;
+    viewclass*      viewObject;
 };
 
 #endif
