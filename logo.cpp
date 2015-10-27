@@ -5,7 +5,7 @@ Logo::Logo()
     : m_count(0)
 {
     m_data.resize(2500 * 6);
-
+/*
     const GLfloat x1 = +0.06f;
     const GLfloat y1 = -0.14f;
     const GLfloat x2 = +0.14f;
@@ -14,19 +14,19 @@ Logo::Logo()
     const GLfloat y3 = +0.00f;
     const GLfloat x4 = +0.30f;
     const GLfloat y4 = +0.22f;
+*/
+    //quad(x1, y1, x2, y2, y2, x2, y1, x1);
+    //quad(x3, y3, x4, y4, y4, x4, y3, x3);
 
-    quad(x1, y1, x2, y2, y2, x2, y1, x1);
-    quad(x3, y3, x4, y4, y4, x4, y3, x3);
-
-    extrude(x1, y1, x2, y2);
-    extrude(x2, y2, y2, x2);
-    extrude(y2, x2, y1, x1);
-    extrude(y1, x1, x1, y1);
-    extrude(x3, y3, x4, y4);
-    extrude(x4, y4, y4, x4);
-    extrude(y4, x4, y3, x3);
-
-    const int NumSectors = 100;
+    //extrude(x1, y1, x2, y2);
+    //extrude(x2, y2, y2, x2);
+    //extrude(y2, x2, y1, x1);
+    //extrude(y1, x1, x1, y1);
+    //extrude(x3, y3, x4, y4);
+    //extrude(x4, y4, y4, x4);
+    //extrude(y4, x4, y3, x3);
+/*
+    const int NumSectors = 3;
 
     for (int i = 0; i < NumSectors; ++i) {
         GLfloat angle = (i * 2 * M_PI) / NumSectors;
@@ -49,7 +49,14 @@ Logo::Logo()
 
         extrude(x6, y6, x7, y7);
         extrude(x8, y8, x5, y5);
-    }
+    }*/
+
+    QVector3D n = QVector3D::normal(QVector3D(0.00f, 0.05f, 0.0f),
+                                    QVector3D(0.05f, 0.00f, 0.0f));
+
+    add(QVector3D(0.00f, 0.05f, -0.05f), n);
+    add(QVector3D(0.05f, 0.05f, -0.05f), n);
+    add(QVector3D(0.05f, 0.00f, -0.05f), n);
 }
 
 void Logo::add(const QVector3D &v, const QVector3D &n)

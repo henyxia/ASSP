@@ -200,6 +200,11 @@ void viewclass::resizeGL(int w, int h)
 void viewclass::mousePressEvent(QMouseEvent *event)
 {
     m_lastPos = event->pos();
+    if (event->buttons() & Qt::LeftButton)
+    {
+        //setXRotation(m_xRot + 8 * 100);
+        setXRotation(0);
+    }
 }
 
 void viewclass::mouseMoveEvent(QMouseEvent *event)
