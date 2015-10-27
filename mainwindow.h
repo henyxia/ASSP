@@ -9,6 +9,7 @@
 #include <QTextEdit>
 #include "logclass.h"
 #include "viewclass.h"
+#include "serialclass.h"
 
 // Class
 class MainWindow
@@ -32,6 +33,7 @@ class MainWindow
     QTextEdit*      outputLog;
     QMenuBar*       menu;
     viewclass*      viewObject;
+    serialclass*    serials;
 };
 
 #endif

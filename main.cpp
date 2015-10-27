@@ -43,13 +43,14 @@ int main(int argc, char *argv[])
                         botLeft, Qt::white);
     mainWin.create();
     qSleep(1000);
-
-    splash->showMessage(QObject::tr("Establishing connections..."),
-                        botLeft, Qt::white);
-    //establishConnections();
-    qSleep(3000);
-
     mainWin.show();
+
+    //splash->showMessage(QObject::tr("Establishing connections..."),
+                        //botLeft, Qt::white);
+    output->printMessage(logClass::INFO, "Looking for interfaces\n");
+    //establishConnections();
+    //qSleep(5000);
+
     output->printMessage(logClass::VALI, "ASSP Successfully started\n");
     //splash->finish(&mainWin);
     delete splash;

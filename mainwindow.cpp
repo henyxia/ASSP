@@ -12,6 +12,7 @@ MainWindow::MainWindow()
     dockContols = NULL;
     menu = NULL;
     outputLog = NULL;
+    serials = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -37,6 +38,12 @@ bool MainWindow::create()
 
     mainWin->setCentralWidget(viewObject);
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
+
+    serials = new serialclass();
+    // Check return
+    serials->listAvailableInterfaces();
+    // Check return
+
     return true;
 }
 
