@@ -40,9 +40,14 @@ bool MainWindow::create()
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
 
     serials = new serialclass();
+    //FIXME
     // Check return
     serials->listAvailableInterfaces();
+    //FIXME
     // Check return
+
+    if(!initMenuBar(viewObject))
+        return false;
 
     return true;
 }
@@ -79,6 +84,36 @@ bool MainWindow::initLog()
     }
 
     output->printMessage(logClass::INFO, "ASSP Starting\n");
+
+    return true;
+}
+
+bool MainWindow::initMenuBar(QWidget* parent)
+{
+    QMenu*      mFile = NULL;
+    QMenu*      mMode = NULL;
+    QAction*    aOpenGerber = NULL;
+    QAction*    aModeManual = NULL;
+
+    menu = new QMenuBar(parent);
+    if(menu == NULL)
+    {
+        QMessageBox msgB(QMessageBox::Critical, "Critical error",
+                         "Unable to init menubar");
+        msgB.exec();
+        return false;
+    }
+
+    mFile = new QMenu("File");
+    aOpenGerber = new QAction("Open Gerber file", mFile);
+    mFile->addAction(aOpenGerber);
+
+    mMode = new QMenu("Mode");
+    aModeManual = new QAction("Manual mode", mMode);
+    mMode->addAction(aModeManual);
+
+    menu->addMenu(mFile);
+    menu->addMenu(mMode);
 
     return true;
 }

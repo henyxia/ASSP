@@ -20,12 +20,13 @@ class MainWindow
     ~MainWindow();
 
     // Public
-    bool create();
-    void show();
+    bool    create();
+    void    show();
 
     // Private
     private:
-    bool initLog();
+    bool            initLog();
+    bool            initMenuBar(QWidget*);
     QMainWindow*    mainWin;
     QDockWidget*    dockLog;
     QDockWidget*    dockStatus;
