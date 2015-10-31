@@ -7,17 +7,22 @@
 #include <QDockWidget>
 #include <QMenuBar>
 #include <QTextEdit>
+#include <QObject>
 #include "logclass.h"
 #include "viewclass.h"
 #include "serialclass.h"
+#include "commandclass.h"
 
 // Class
-class MainWindow
+class MainWindow : public QObject
 {
+    Q_OBJECT
+
     // Con/Des structor
     public:
     MainWindow();
     ~MainWindow();
+    //~MainWindow() {};
 
     // Public
     bool    create();
@@ -35,6 +40,10 @@ class MainWindow
     QMenuBar*       menu;
     viewclass*      viewObject;
     serialclass*    serials;
+    commandclass*   command;
+
+    private slots:
+    void startManualMode();
 };
 
 #endif

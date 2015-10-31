@@ -10,9 +10,11 @@ MainWindow::MainWindow()
     dockLog = NULL;
     dockStatus = NULL;
     dockContols = NULL;
-    menu = NULL;
     outputLog = NULL;
+    menu = NULL;
+    viewObject = NULL;
     serials = NULL;
+    command = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +37,13 @@ bool MainWindow::create()
     }
 
     viewObject = new viewclass();
+    if(viewObject == NULL)
+    {
+        QMessageBox msgB(QMessageBox::Critical, "Critical error",
+                         "Unable to init view");
+        msgB.exec();
+        return false;
+    }
 
     mainWin->setCentralWidget(viewObject);
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
@@ -69,7 +78,7 @@ bool MainWindow::initLog()
         msgB.exec();
         return false;
     }
-    outputLog->setEnabled(false);
+    //outputLog->setEnabled(false);
     outputLog->setMinimumHeight(100);
     outputLog->setMaximumHeight(100);
     output->addOutput(outputLog);
@@ -86,6 +95,13 @@ bool MainWindow::initLog()
     output->printMessage(logClass::INFO, "ASSP Starting\n");
 
     return true;
+}
+
+void MainWindow::startManualMode()
+{
+    QMessageBox msgB(QMessageBox::NoIcon, "Something",
+                     "Happened");
+    msgB.exec();
 }
 
 bool MainWindow::initMenuBar(QWidget* parent)
@@ -111,6 +127,11 @@ bool MainWindow::initMenuBar(QWidget* parent)
     mMode = new QMenu("Mode");
     aModeManual = new QAction("Manual mode", mMode);
     mMode->addAction(aModeManual);
+    connect(
+            aModeManual,
+            SIGNAL(triggered()),
+            this,
+            SLOT(startManualMode()));
 
     menu->addMenu(mFile);
     menu->addMenu(mMode);

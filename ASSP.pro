@@ -11,7 +11,8 @@ SOURCES += main.cpp \
 	logclass.cpp \
 	viewclass.cpp \
 	logo.cpp \
-	serialclass.cpp
+	serialclass.cpp \
+    commandclass.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -19,7 +20,8 @@ HEADERS  += \
 	globals.h \
 	viewclass.h \
 	logo.h \
-	serialclass.h
+	serialclass.h \
+    commandclass.h
 
 RESOURCES += \
 	splash.qrc
