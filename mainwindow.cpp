@@ -1,20 +1,11 @@
 // Includes
 #include "mainwindow.h"
-#include "globals.h"
 #include <QMessageBox>
 #include <QObject>
 
 MainWindow::MainWindow()
 {
-    mainWin = NULL;
-    dockLog = NULL;
-    dockStatus = NULL;
-    dockContols = NULL;
-    outputLog = NULL;
-    menu = NULL;
-    viewObject = NULL;
-    serials = NULL;
-    command = NULL;
+	l = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -29,7 +20,7 @@ bool MainWindow::create()
 
     ret = initLog();
     if(!ret)
-    {
+   {
         QMessageBox msgB(QMessageBox::Critical, "Critical error",
                          "Unable to init log");
         msgB.exec();
@@ -48,15 +39,15 @@ bool MainWindow::create()
     mainWin->setCentralWidget(viewObject);
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
 
-    serials = new serialclass();
+    //serials = new serialclass();
     //FIXME
     // Check return
-    serials->listAvailableInterfaces();
+    //serials->listAvailableInterfaces();
     //FIXME
     // Check return
 
-    if(!initMenuBar(viewObject))
-        return false;
+    //if(!initMenuBar(viewObject))
+        //return false;
 
     return true;
 }
@@ -65,7 +56,12 @@ void MainWindow::show()
 {
     mainWin->showMaximized();
 }
-
+/*
+bool MainWindow::initControls()
+{
+	//dockControls = new QDockWidget("Controls");
+}
+*/
 bool MainWindow::initLog()
 {
 

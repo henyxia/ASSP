@@ -8,20 +8,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
 	mainwindow.cpp \
-	logclass.cpp \
-	viewclass.cpp \
-	logo.cpp \
-	serialclass.cpp \
-    commandclass.cpp
+	log.cpp \
+	output.cpp \
+	view.cpp \
+	remote.cpp \
+	serial.cpp \
+	control.cpp
 
 HEADERS  += \
 	mainwindow.h \
-	logclass.h \
-	globals.h \
-	viewclass.h \
+	log.h \
+	output.h \
+	view.h \
 	logo.h \
-	serialclass.h \
-    commandclass.h
+	remote.h \
+	serial.h \
+	control.h
 
 RESOURCES += \
 	splash.qrc

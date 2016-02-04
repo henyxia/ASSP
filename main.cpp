@@ -3,12 +3,13 @@
 #include <QApplication>
 #include <QSplashScreen>
 
+// Conditionnal includes
 #ifdef Q_OS_WIN
-#include <windows.h> // for Sleep
+#include <windows.h> // for sleep
 #endif
+
 void qSleep(int ms)
 {
-
 #ifdef Q_OS_WIN
     Sleep(uint(ms));
 #else
@@ -16,6 +17,7 @@ void qSleep(int ms)
     nanosleep(&ts, NULL);
 #endif
 }
+
 // Globals
 logClass* output = NULL;
 
@@ -35,11 +37,11 @@ int main(int argc, char *argv[])
     Qt::Alignment botLeft = Qt::AlignLeft | Qt::AlignBottom;
 
     // Creating the main window
-    splash->showMessage(QObject::tr("Creating the main window..."),
+    splash->showMessage(QObject::tr("Allocating the main window..."),
                         botLeft, Qt::white);
     MainWindow mainWin;
     qSleep(1000);
-    splash->showMessage(QObject::tr("Dressing the main window..."),
+    splash->showMessage(QObject::tr("Creating the main window..."),
                         botLeft, Qt::white);
     mainWin.create();
     qSleep(1000);

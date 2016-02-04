@@ -8,10 +8,10 @@
 #include <QMenuBar>
 #include <QTextEdit>
 #include <QObject>
-#include "logclass.h"
-#include "viewclass.h"
-#include "serialclass.h"
-#include "commandclass.h"
+#include "log.h"
+#include "view.h"
+#include "remote.h"
+#include "control.h"
 
 // Class
 class MainWindow : public QObject
@@ -22,7 +22,6 @@ class MainWindow : public QObject
     public:
     MainWindow();
     ~MainWindow();
-    //~MainWindow() {};
 
     // Public
     bool    create();
@@ -30,17 +29,10 @@ class MainWindow : public QObject
 
     // Private
     private:
-    bool            initLog();
-    bool            initMenuBar(QWidget*);
-    QMainWindow*    mainWin;
-    QDockWidget*    dockLog;
-    QDockWidget*    dockStatus;
-    QDockWidget*    dockContols;
-    QTextEdit*      outputLog;
-    QMenuBar*       menu;
-    viewclass*      viewObject;
-    serialclass*    serials;
-    commandclass*   command;
+	//control*	c;
+	logAAA		l;
+	//remote*		r;
+	//view*		v;
 
     private slots:
     void startManualMode();

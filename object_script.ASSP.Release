@@ -1,0 +1,13 @@
+INPUT(
+./release\main.o
+./release\mainwindow.o
+./release\log.o
+./release\output.o
+./release\view.o
+./release\remote.o
+./release\serial.o
+./release\control.o
+./release\qrc_splash.o
+./release\moc_mainwindow.o
+./release\moc_view.o
+);
