@@ -1,3 +1,6 @@
 output/*
 *.swp
-object_script*
+
+object_script.*
+Makefile*
+release*
