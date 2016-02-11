@@ -37,10 +37,21 @@ bool MainWindow::create()
         return false;
     }
 
+	// Log initialization
+	l = new log();
+	if(l == NULL)
+	{
+		QMessageBox msgB(QMessageBox::Critical, "Critical error",
+			"Unable to init log");
+        msgB.exec();
+        return false;
+	}
+	l->create();
+
     mainWin->setCentralWidget(v);
 	//TODO
 	// Add this
-    //mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
+    mainWin->addDockWidget(Qt::BottomDockWidgetArea, l);
 
     //serials = new serialclass();
     //FIXME

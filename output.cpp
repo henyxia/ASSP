@@ -9,14 +9,16 @@ output::~output()
 {
 }
 
-void output::addOutput(QTextEdit *out)
+void output::create(void)
 {
-    outputStream = out;
+    this->setEnabled(false);
+    this->setMinimumHeight(100);
+    this->setMaximumHeight(100);
 }
 
 void output::printMessage(Severity, QString msg)
 {
-    outputStream->moveCursor(QTextCursor::End);
-    outputStream->insertPlainText(msg);
-    outputStream->moveCursor(QTextCursor::End);
+    this->moveCursor(QTextCursor::End);
+    this->insertPlainText(msg);
+    this->moveCursor(QTextCursor::End);
 }

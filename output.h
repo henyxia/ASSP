@@ -21,7 +21,7 @@ class output: public QTextEdit
         VALI,
         ERRO
     }Severity;
-    void    addOutput(QTextEdit*);
+    void    create(void);
     void    printMessage(Severity, QString);
 
     // Private
