@@ -1,6 +1,6 @@
-#include "viewclass.h"
+#include "view.h"
 
-viewclass::viewclass(QWidget *parent) : QOpenGLWidget(parent),
+view::view(QWidget *parent) : QOpenGLWidget(parent),
     m_xRot(0),
     m_yRot(0),
     m_zRot(0),
@@ -9,7 +9,7 @@ viewclass::viewclass(QWidget *parent) : QOpenGLWidget(parent),
 
 }
 
-viewclass::~viewclass()
+view::~view()
 {
 }
 
@@ -21,7 +21,7 @@ static void qNormalizeAngle(int &angle)
         angle -= 360 * 16;
 }
 
-void viewclass::setXRotation(int angle)
+void view::setXRotation(int angle)
 {
     qNormalizeAngle(angle);
     if (angle != m_xRot) {
@@ -31,7 +31,7 @@ void viewclass::setXRotation(int angle)
     }
 }
 
-void viewclass::setYRotation(int angle)
+void view::setYRotation(int angle)
 {
     qNormalizeAngle(angle);
     if (angle != m_yRot) {
@@ -41,7 +41,7 @@ void viewclass::setYRotation(int angle)
     }
 }
 
-void viewclass::setZRotation(int angle)
+void view::setZRotation(int angle)
 {
     qNormalizeAngle(angle);
     if (angle != m_zRot) {
@@ -51,7 +51,7 @@ void viewclass::setZRotation(int angle)
     }
 }
 
-void viewclass::cleanup()
+void view::cleanup()
 {
     makeCurrent();
     m_logoVbo.destroy();
@@ -115,9 +115,9 @@ static const char *fragmentShaderSource =
     "   gl_FragColor = vec4(col, 1.0);\n"
     "}\n";
 
-void viewclass::initializeGL()
+void view::initializeGL()
 {
-    connect(context(), &QOpenGLContext::aboutToBeDestroyed, this, &viewclass::cleanup);
+    connect(context(), &QOpenGLContext::aboutToBeDestroyed, this, &view::cleanup);
 
     initializeOpenGLFunctions();
     glClearColor(0, 0, 0, m_transparent ? 0 : 1);
@@ -156,7 +156,7 @@ void viewclass::initializeGL()
     m_program->release();
 }
 
-void viewclass::setupVertexAttribs()
+void view::setupVertexAttribs()
 {
     m_logoVbo.bind();
     QOpenGLFunctions *f = QOpenGLContext::currentContext()->functions();
@@ -168,7 +168,7 @@ void viewclass::setupVertexAttribs()
     m_logoVbo.release();
 }
 
-void viewclass::paintGL()
+void view::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
@@ -191,13 +191,13 @@ void viewclass::paintGL()
     m_program->release();
 }
 
-void viewclass::resizeGL(int w, int h)
+void view::resizeGL(int w, int h)
 {
     m_proj.setToIdentity();
     m_proj.perspective(45.0f, GLfloat(w) / h, 0.01f, 100.0f);
 }
 
-void viewclass::mousePressEvent(QMouseEvent *event)
+void view::mousePressEvent(QMouseEvent *event)
 {
     m_lastPos = event->pos();
     if (event->buttons() & Qt::LeftButton)
@@ -207,7 +207,7 @@ void viewclass::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void viewclass::mouseMoveEvent(QMouseEvent *event)
+void view::mouseMoveEvent(QMouseEvent *event)
 {
     int dx = event->x() - m_lastPos.x();
     int dy = event->y() - m_lastPos.y();

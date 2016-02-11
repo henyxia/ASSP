@@ -18,17 +18,11 @@ void qSleep(int ms)
 #endif
 }
 
-// Globals
-logClass* output = NULL;
-
 // Main
 int main(int argc, char *argv[])
 {
     // Starting
     QApplication app(argc, argv);
-
-    // Creating the log channel
-    output = new logClass();
 
     // Displaying splashcreen
     QSplashScreen *splash = new QSplashScreen;
@@ -49,11 +43,11 @@ int main(int argc, char *argv[])
 
     //splash->showMessage(QObject::tr("Establishing connections..."),
                         //botLeft, Qt::white);
-    output->printMessage(logClass::INFO, "Looking for interfaces\n");
+    //output->printMessage(logClass::INFO, "Looking for interfaces\n");
     //establishConnections();
     //qSleep(5000);
 
-    output->printMessage(logClass::VALI, "ASSP Successfully started\n");
+    //output->printMessage(logClass::VALI, "ASSP Successfully started\n");
     //splash->finish(&mainWin);
     delete splash;
 

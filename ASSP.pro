@@ -11,6 +11,7 @@ SOURCES += main.cpp \
 	log.cpp \
 	output.cpp \
 	view.cpp \
+	logo.cpp \
 	remote.cpp \
 	serial.cpp \
 	control.cpp

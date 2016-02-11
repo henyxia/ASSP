@@ -1,6 +1,6 @@
 // Protector
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LOG_H
+#define LOG_H
 
 // Includes
 #include <QDockWidget>
@@ -9,7 +9,7 @@
 #include "output.h"
 
 // Class
-class logAAA : public QDockWidget
+class log : public QDockWidget
 {
     // Con/Des structor
     public:

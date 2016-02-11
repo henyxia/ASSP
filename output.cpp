@@ -5,16 +5,16 @@ output::output()
     outputStream = NULL;
 }
 
-logClass::~logClass()
+output::~output()
 {
 }
 
-void logClass::addOutput(QTextEdit *out)
+void output::addOutput(QTextEdit *out)
 {
     outputStream = out;
 }
 
-void logClass::printMessage(Severity, QString msg)
+void output::printMessage(Severity, QString msg)
 {
     outputStream->moveCursor(QTextCursor::End);
     outputStream->insertPlainText(msg);

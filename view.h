@@ -16,13 +16,13 @@
 QT_FORWARD_DECLARE_CLASS(QOpenGLShaderProgram)
 
 // Class
-class viewclass : public QOpenGLWidget, protected QOpenGLFunctions
+class view : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
     // Con/Des structor
     public:
-    viewclass(QWidget *parent=0);
-    ~viewclass();
+    view(QWidget *parent=0);
+    ~view();
 
     // Public
     public slots:

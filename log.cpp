@@ -9,7 +9,7 @@ log::~log()
 {
 }
 
-bool log::create(void)
+void log::create(void)
 {
 	out = new output();
 }

@@ -29,10 +29,14 @@ class MainWindow : public QObject
 
     // Private
     private:
-	//control*	c;
-	logAAA		l;
+	bool			initMenuBar	(QWidget*);
+
+	QMainWindow*	mainWin;
+	QMenuBar*		menu;
+	//control*		c;
+	log*			l;
 	//remote*		r;
-	//view*		v;
+	view*			v;
 
     private slots:
     void startManualMode();

@@ -14,10 +14,11 @@ MainWindow::~MainWindow()
 
 bool MainWindow::create()
 {
-    bool ret;
-
     mainWin = new QMainWindow();
 
+	//TODO
+	//Delete these lines
+/*
     ret = initLog();
     if(!ret)
    {
@@ -26,9 +27,9 @@ bool MainWindow::create()
         msgB.exec();
         return false;
     }
-
-    viewObject = new viewclass();
-    if(viewObject == NULL)
+*/
+    v = new view();
+    if(v == NULL)
     {
         QMessageBox msgB(QMessageBox::Critical, "Critical error",
                          "Unable to init view");
@@ -36,8 +37,10 @@ bool MainWindow::create()
         return false;
     }
 
-    mainWin->setCentralWidget(viewObject);
-    mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
+    mainWin->setCentralWidget(v);
+	//TODO
+	// Add this
+    //mainWin->addDockWidget(Qt::BottomDockWidgetArea, dockLog);
 
     //serials = new serialclass();
     //FIXME
@@ -61,7 +64,7 @@ bool MainWindow::initControls()
 {
 	//dockControls = new QDockWidget("Controls");
 }
-*/
+
 bool MainWindow::initLog()
 {
 
@@ -92,7 +95,7 @@ bool MainWindow::initLog()
 
     return true;
 }
-
+*/
 void MainWindow::startManualMode()
 {
     QMessageBox msgB(QMessageBox::NoIcon, "Something",

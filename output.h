@@ -10,8 +10,8 @@ class output: public QTextEdit
 {
     // Con/Des structor
     public:
-    logClass();
-    ~logClass();
+    output();
+    ~output();
 
     // Public
     typedef enum severity
