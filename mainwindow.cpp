@@ -15,19 +15,14 @@ MainWindow::~MainWindow()
 bool MainWindow::create()
 {
     mainWin = new QMainWindow();
-
-	//TODO
-	//Delete these lines
-/*
-    ret = initLog();
-    if(!ret)
-   {
+	if(mainWin == NULL)
+	{
         QMessageBox msgB(QMessageBox::Critical, "Critical error",
-                         "Unable to init log");
+                         "Unable to init view");
         msgB.exec();
         return false;
     }
-*/
+
     v = new view();
     if(v == NULL)
     {
@@ -48,10 +43,10 @@ bool MainWindow::create()
 	}
 	l->create();
 
+	// Render
     mainWin->setCentralWidget(v);
-	//TODO
-	// Add this
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, l);
+	l->out->printMessage(output::VALI, "ASSP Render Finished\n");
 
     //serials = new serialclass();
     //FIXME
