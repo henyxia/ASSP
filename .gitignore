@@ -1,6 +1,5 @@
 output/*
 *.swp
-
 object_script.*
 Makefile*
 release*
