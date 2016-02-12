@@ -48,6 +48,20 @@ bool MainWindow::create()
     mainWin->addDockWidget(Qt::BottomDockWidgetArea, l);
 	l->out->printMessage(output::VALI, "ASSP Render Finished\n");
 
+	// Try to establish the remote connection
+	r = new remote();
+	r->create();
+	if(r == NULL)
+		l->out->printMessage(output::ERRO,
+				"Unable to create the remote object");
+	else
+	{
+		int ret = r->listAvailableInterfaces();
+        QString s = QObject::tr("Remote connection initialized with ") +
+			QString::number(ret) + QObject::tr(" connection(s)\n");
+		l->out->printMessage(output::INFO, s);
+	}
+
     //serials = new serialclass();
     //FIXME
     // Check return
@@ -69,37 +83,6 @@ void MainWindow::show()
 bool MainWindow::initControls()
 {
 	//dockControls = new QDockWidget("Controls");
-}
-
-bool MainWindow::initLog()
-{
-
-    dockLog = new QDockWidget("Log");
-    outputLog = new QTextEdit();
-    if(outputLog == NULL)
-    {
-        QMessageBox msgB(QMessageBox::NoIcon, "Critical error",
-                         "Unable to create output log");
-        msgB.exec();
-        return false;
-    }
-    //outputLog->setEnabled(false);
-    outputLog->setMinimumHeight(100);
-    outputLog->setMaximumHeight(100);
-    output->addOutput(outputLog);
-    dockLog->setWidget(outputLog);
-
-    if(dockLog == NULL)
-    {
-        QMessageBox msgB(QMessageBox::NoIcon, "Critical error",
-                         "Unable to create log");
-        msgB.exec();
-        return false;
-    }
-
-    output->printMessage(logClass::INFO, "ASSP Starting\n");
-
-    return true;
 }
 */
 void MainWindow::startManualMode()

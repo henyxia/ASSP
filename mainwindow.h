@@ -35,7 +35,7 @@ class MainWindow : public QObject
 	QMenuBar*		menu;
 	//control*		c;
 	log*			l;
-	//remote*		r;
+	remote*			r;
 	view*			v;
 
     private slots:

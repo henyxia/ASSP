@@ -1,5 +1,4 @@
 #include "serial.h"
-#include <QtSerialPort/QSerialPortInfo>
 #include <QtSerialPort/QSerialPort>
 
 QT_USE_NAMESPACE
@@ -15,10 +14,9 @@ serial::~serial()
 int serial::listAvailableInterfaces()
 {
     int av = 0;
-    char data[3];
+    //char data[3];
 
     // Creating portinfo
-    QSerialPortInfo lpi[256];
     int lpii = 0;
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
@@ -42,7 +40,7 @@ int serial::listAvailableInterfaces()
     }
 
     //output->printMessage(logClass::INFO, "Interfaces revealed : "+QString::number(av)+"\n");
-
+/*
     QSerialPort *port = new QSerialPort(lpi[0]);
     if(!port->open(QIODevice::ReadWrite))
     {
@@ -59,7 +57,7 @@ int serial::listAvailableInterfaces()
         //output->printMessage(logClass::INFO, "HELLO ? : ");
         //output->printMessage(logClass::INFO, data);
         //output->printMessage(logClass::INFO, "\n");
-
+*/
     return av;
 }
 
