@@ -1,6 +1,6 @@
 // Protector
-#ifndef OUTPUT_H
-#define OUTPUT_H
+#ifndef __OUTPUT_H__
+#define __OUTPUT_H__
 
 // Includes
 #include <QTextEdit>

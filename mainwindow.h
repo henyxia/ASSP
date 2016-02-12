@@ -1,6 +1,6 @@
 // Protector
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef __MAINWINDOW_H__
+#define __MAINWINDOW_H__
 
 // Includes
 #include <QMainWindow>

@@ -1,6 +1,6 @@
 // Protector
-#ifndef __VIEWCLASS_H__
-#define __VIEWCLASS_H__
+#ifndef __VIEW_H__
+#define __VIEW_H__
 
 // Includes
 #include <QOpenGLWidget>

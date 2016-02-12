@@ -1,18 +1,18 @@
-#include "serialclass.h"
+#include "serial.h"
 #include <QtSerialPort/QSerialPortInfo>
 #include <QtSerialPort/QSerialPort>
 
 QT_USE_NAMESPACE
 
-serialclass::serialclass()
+serial::serial()
 {
 }
 
-serialclass::~serialclass()
+serial::~serial()
 {
 }
 
-int serialclass::listAvailableInterfaces()
+int serial::listAvailableInterfaces()
 {
     int av = 0;
     char data[3];

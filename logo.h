@@ -1,5 +1,5 @@
-#ifndef LOGO_H
-#define LOGO_H
+#ifndef __LOGO_H__
+#define __LOGO_H__
 
 #include <qopengl.h>
 #include <QVector>
