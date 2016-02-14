@@ -60,6 +60,7 @@ bool MainWindow::create()
         QString s = QObject::tr("Remote connection initialized with ") +
 			QString::number(ret) + QObject::tr(" connection(s)\n");
 		l->out->printMessage(output::INFO, s);
+		r->establishConnection();
 	}
 
     //serials = new serialclass();

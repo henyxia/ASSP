@@ -23,8 +23,9 @@ class remote
 public:
 	remote();
 	~remote();
-	bool create();
-	int listAvailableInterfaces();
+	bool	create();
+	int		establishConnection();
+	int		listAvailableInterfaces();
 
 private:
 	serial*	s;

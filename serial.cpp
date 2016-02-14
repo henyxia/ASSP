@@ -1,5 +1,7 @@
 #include "serial.h"
 #include <QtSerialPort/QSerialPort>
+#include <QMessageBox>
+#include <QObject>
 
 QT_USE_NAMESPACE
 
@@ -13,15 +15,12 @@ serial::~serial()
 
 int serial::listAvailableInterfaces()
 {
-    int av = 0;
-    //char data[3];
-
     // Creating portinfo
-    int lpii = 0;
+    lpii = 0;
 
     foreach (const QSerialPortInfo &info, QSerialPortInfo::availablePorts())
     {
-        av++;
+        /*
         QString s = QObject::tr("Port: ") + info.portName() + "\n"
                     + QObject::tr("Location: ") + info.systemLocation() + "\n"
                     + QObject::tr("Description: ") + info.description() + "\n"
@@ -32,9 +31,7 @@ int serial::listAvailableInterfaces()
                     + QObject::tr("Product Identifier: ")
                     + (info.hasProductIdentifier() ? QString::number(info.productIdentifier(), 16) : QString()) + "\n"
                     + QObject::tr("Busy: ") + (info.isBusy() ? QObject::tr("Yes") : QObject::tr("No")) + "\n";
-		//TODO
-		// Add this request to the corresponding signal
-        //output->printMessage(logClass::INFO, s);
+                    */
         lpi[lpii] = info;
         lpii++;
     }
@@ -58,6 +55,32 @@ int serial::listAvailableInterfaces()
         //output->printMessage(logClass::INFO, data);
         //output->printMessage(logClass::INFO, "\n");
 */
-    return av;
+    return lpii;
 }
 
+int serial::tryToConnect(int spi)
+{
+    char        data[50];
+    int         read;
+    QByteArray	raw;
+
+    pi = new QSerialPort(lpi[spi]);
+
+    if(!pi->open(QIODevice::ReadWrite))
+        return -1;
+    pi->write("IPUNT");
+
+    while(pi->waitForReadyRead(1000))
+        raw = pi->read(4);
+    QString response(raw);
+/*
+    QString s = QObject::tr("LEN[") + QString::number(read) + "]" + QObject::tr("DATA[")
+            + data + QObject::tr("DATA[");*/
+
+    QMessageBox msgB(QMessageBox::Critical, "Critical error",
+                         response);
+    msgB.exec();
+
+    return 0;
+
+}
