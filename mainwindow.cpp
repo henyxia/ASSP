@@ -76,7 +76,7 @@ bool MainWindow::create()
         return false;
 	}
 	c->create();
-	mainWin->addDockWidget(Qt::BottomDockWidgetArea, c);
+	mainWin->addDockWidget(Qt::RightDockWidgetArea, c);
 
     return true;
 }
