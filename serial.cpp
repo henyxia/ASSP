@@ -5,6 +5,20 @@
 
 QT_USE_NAMESPACE
 
+#ifdef Q_OS_WIN
+#include <windows.h> // for sleep
+#endif
+
+void qSleep(int ms)
+{
+#ifdef Q_OS_WIN
+    Sleep(uint(ms));
+#else
+    struct timespec ts = { ms / 1000, (ms % 1000) * 1000 * 1000 };
+    nanosleep(&ts, NULL);
+#endif
+}
+
 serial::serial()
 {
 }
@@ -60,20 +74,41 @@ int serial::listAvailableInterfaces()
 
 int serial::tryToConnect(int spi)
 {
+	//QByteArray*	versionQuery = new QByteArray(1, (char)0x0F);
+	QByteArray	versionQuery(1, (char)0x0F);
     QByteArray	raw;
+	qint8		major;
+	qint8		minor;
 
     pi = new QSerialPort(lpi[spi]);
 
     if(!pi->open(QIODevice::ReadWrite))
         return -1;
-    pi->write("IPUNT");
+	qSleep(1500);
+    pi->write(versionQuery);
 
     if(pi->waitForReadyRead(10000))
 	{
-        raw = pi->read(1);
-		QString response(raw);
-		QMessageBox msgB(QMessageBox::Critical, "Working !", response);
+        raw = pi->readAll();
+		minor = raw[0] >> 4;
+		//if(pi->waitForReadyRead(10000))
+		//{
+        //raw = pi->read(1);
+		major = raw[1];
+		//QString response(raw);
+	    QString s = QObject::tr("Connected to MEGA ver ") +
+			QString::number(major) + QObject::tr(".") + QString::number(minor);
+		QMessageBox msgB(QMessageBox::Critical, "Working !", s);
 		msgB.exec();
+		//}
+		//else
+		//{
+		//    QString s = QObject::tr("Uncomplete version data (minor:") +
+		//		QString::number(minor) + QObject::tr(")");
+		//	QMessageBox msgB(QMessageBox::Critical, "Warning !", s);
+		//	msgB.exec();
+		//
+		//}
 	}
 	else
 	{

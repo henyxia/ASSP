@@ -4,6 +4,7 @@
 #include <QSplashScreen>
 
 // Conditionnal includes
+/*
 #ifdef Q_OS_WIN
 #include <windows.h> // for sleep
 #endif
@@ -17,6 +18,7 @@ void qSleep(int ms)
     nanosleep(&ts, NULL);
 #endif
 }
+*/
 
 // Main
 int main(int argc, char *argv[])
@@ -34,11 +36,11 @@ int main(int argc, char *argv[])
     splash->showMessage(QObject::tr("Allocating the main window..."),
                         botLeft, Qt::white);
     MainWindow mainWin;
-    qSleep(1000);
+    //qSleep(1000);
     splash->showMessage(QObject::tr("Creating the main window..."),
                         botLeft, Qt::white);
     mainWin.create();
-    qSleep(1000);
+    //qSleep(1000);
     mainWin.show();
 
     //splash->showMessage(QObject::tr("Establishing connections..."),
