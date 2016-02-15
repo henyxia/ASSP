@@ -12,9 +12,10 @@ public:
     serial();
     ~serial();
     int	listAvailableInterfaces();
-    int	lpii;
 	int	tryToConnect(int);
+    int	lpii;
 private:
+	int	checkAllowedVersion(qint8, qint8);
     QSerialPortInfo lpi[256];
 	QSerialPort*	pi;
 };

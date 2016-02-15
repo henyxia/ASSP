@@ -1,14 +1,18 @@
+// Includes
 #include "serial.h"
 #include <QtSerialPort/QSerialPort>
 #include <QMessageBox>
 #include <QObject>
 
-QT_USE_NAMESPACE
-
+// Conditionnal include
 #ifdef Q_OS_WIN
 #include <windows.h> // for sleep
 #endif
 
+// Qt Namespace
+QT_USE_NAMESPACE
+
+// Platform independent sleep
 void qSleep(int ms)
 {
 #ifdef Q_OS_WIN
@@ -74,7 +78,7 @@ int serial::listAvailableInterfaces()
 
 int serial::tryToConnect(int spi)
 {
-	//QByteArray*	versionQuery = new QByteArray(1, (char)0x0F);
+	int			ret;
 	QByteArray	versionQuery(1, (char)0x0F);
     QByteArray	raw;
 	qint8		major;
@@ -84,44 +88,39 @@ int serial::tryToConnect(int spi)
 
     if(!pi->open(QIODevice::ReadWrite))
         return -1;
-	qSleep(1500);
+	qSleep(2000);
     pi->write(versionQuery);
 
-    if(pi->waitForReadyRead(10000))
+    if(pi->waitForReadyRead(100))
 	{
         raw = pi->readAll();
 		minor = raw[0] >> 4;
-		//if(pi->waitForReadyRead(10000))
-		//{
-        //raw = pi->read(1);
 		major = raw[1];
-		//QString response(raw);
-	    QString s = QObject::tr("Connected to MEGA ver ") +
-			QString::number(major) + QObject::tr(".") + QString::number(minor);
-		QMessageBox msgB(QMessageBox::Critical, "Working !", s);
-		msgB.exec();
-		//}
-		//else
-		//{
-		//    QString s = QObject::tr("Uncomplete version data (minor:") +
-		//		QString::number(minor) + QObject::tr(")");
-		//	QMessageBox msgB(QMessageBox::Critical, "Warning !", s);
-		//	msgB.exec();
-		//
-		//}
+		ret = checkAllowedVersion(major, minor);
+		if(ret != 0)
+			return -1;
+	    //QString s = QObject::tr("Connected to MEGA ver ") +
+		//	QString::number(major) + QObject::tr(".") + QString::number(minor);
+		//QMessageBox msgB(QMessageBox::Critical, "Working !", s);
+		//msgB.exec();
 	}
 	else
 	{
+		/*
 		QMessageBox msgB(QMessageBox::Critical, "Critical error",
-				"Unable to read data");
+			"Unable to read data");
 		msgB.exec();
-
+		*/
+		return -2;
 	}
-/*
-    QString s = QObject::tr("LEN[") + QString::number(read) + "]" + QObject::tr("DATA[")
-            + data + QObject::tr("DATA[");*/
-
 
     return 0;
+}
 
+int serial::checkAllowedVersion(qint8 maj, qint8 min)
+{
+	// Basic checking
+	if(maj == 0 && min == 1)
+		return 0;
+	return -1;
 }
