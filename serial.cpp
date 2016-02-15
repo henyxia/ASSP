@@ -60,8 +60,6 @@ int serial::listAvailableInterfaces()
 
 int serial::tryToConnect(int spi)
 {
-    char        data[50];
-    int         read;
     QByteArray	raw;
 
     pi = new QSerialPort(lpi[spi]);
@@ -70,16 +68,24 @@ int serial::tryToConnect(int spi)
         return -1;
     pi->write("IPUNT");
 
-    while(pi->waitForReadyRead(1000))
-        raw = pi->read(4);
-    QString response(raw);
+    if(pi->waitForReadyRead(10000))
+	{
+        raw = pi->read(1);
+		QString response(raw);
+		QMessageBox msgB(QMessageBox::Critical, "Working !", response);
+		msgB.exec();
+	}
+	else
+	{
+		QMessageBox msgB(QMessageBox::Critical, "Critical error",
+				"Unable to read data");
+		msgB.exec();
+
+	}
 /*
     QString s = QObject::tr("LEN[") + QString::number(read) + "]" + QObject::tr("DATA[")
             + data + QObject::tr("DATA[");*/
 
-    QMessageBox msgB(QMessageBox::Critical, "Critical error",
-                         response);
-    msgB.exec();
 
     return 0;
 
