@@ -6,6 +6,9 @@
 MainWindow::MainWindow()
 {
 	l = NULL;
+	c = NULL;
+	r = NULL;
+	v = NULL;
 }
 
 MainWindow::~MainWindow()
@@ -63,15 +66,17 @@ bool MainWindow::create()
 		r->establishConnection();
 	}
 
-    //serials = new serialclass();
-    //FIXME
-    // Check return
-    //serials->listAvailableInterfaces();
-    //FIXME
-    // Check return
-
-    //if(!initMenuBar(viewObject))
-        //return false;
+	// Creating the control panel
+	c = new control();
+	if(c == NULL)
+	{
+		QMessageBox msgB(QMessageBox::Critical, "Critical error",
+			"Unable to the control");
+        msgB.exec();
+        return false;
+	}
+	c->create();
+	mainWin->addDockWidget(Qt::BottomDockWidgetArea, c);
 
     return true;
 }

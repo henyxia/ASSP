@@ -33,7 +33,7 @@ class MainWindow : public QObject
 
 	QMainWindow*	mainWin;
 	QMenuBar*		menu;
-	//control*		c;
+	control*		c;
 	log*			l;
 	remote*			r;
 	view*			v;
