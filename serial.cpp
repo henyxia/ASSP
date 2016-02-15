@@ -3,6 +3,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QMessageBox>
 #include <QObject>
+#include "log.h"
 
 // Conditionnal include
 #ifdef Q_OS_WIN
@@ -54,25 +55,6 @@ int serial::listAvailableInterfaces()
         lpii++;
     }
 
-    //output->printMessage(logClass::INFO, "Interfaces revealed : "+QString::number(av)+"\n");
-/*
-    QSerialPort *port = new QSerialPort(lpi[0]);
-    if(!port->open(QIODevice::ReadWrite))
-    {
-        //output->printMessage(logClass::INFO, "Error while opening serial port\n");
-        return -1;
-    };
-
-        port->setBaudRate(QSerialPort::Baud9600);
-        //while(port->bytesAvailable() <= 0);
-        QByteArray readData = port->readAll();
-        while (port->waitForReadyRead(5000))
-            readData.append(port->readAll());
-        port->read(data, 3);
-        //output->printMessage(logClass::INFO, "HELLO ? : ");
-        //output->printMessage(logClass::INFO, data);
-        //output->printMessage(logClass::INFO, "\n");
-*/
     return lpii;
 }
 
@@ -94,25 +76,16 @@ int serial::tryToConnect(int spi)
     if(pi->waitForReadyRead(100))
 	{
         raw = pi->readAll();
+		//TODO
+		// Add processing data function
 		minor = raw[0] >> 4;
 		major = raw[1];
 		ret = checkAllowedVersion(major, minor);
 		if(ret != 0)
 			return -1;
-	    //QString s = QObject::tr("Connected to MEGA ver ") +
-		//	QString::number(major) + QObject::tr(".") + QString::number(minor);
-		//QMessageBox msgB(QMessageBox::Critical, "Working !", s);
-		//msgB.exec();
 	}
 	else
-	{
-		/*
-		QMessageBox msgB(QMessageBox::Critical, "Critical error",
-			"Unable to read data");
-		msgB.exec();
-		*/
 		return -2;
-	}
 
     return 0;
 }
