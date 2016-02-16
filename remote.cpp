@@ -34,3 +34,8 @@ int remote::establishConnection()
 
 	return -1;
 }
+
+QString remote::getPortName(int conn)
+{
+	return s->lpi[conn].portName();
+}

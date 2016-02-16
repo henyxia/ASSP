@@ -26,6 +26,7 @@ public:
 	bool	create();
 	int		establishConnection();
 	int		listAvailableInterfaces();
+	QString	getPortName(int);
 
 private:
 	serial*	s;

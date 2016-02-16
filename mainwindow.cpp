@@ -46,26 +46,6 @@ bool MainWindow::create()
 	}
 	l->create();
 
-	// Render
-    mainWin->setCentralWidget(v);
-    mainWin->addDockWidget(Qt::BottomDockWidgetArea, l);
-	l->out->printMessage(output::VALI, "ASSP Render Finished\n");
-
-	// Try to establish the remote connection
-	r = new remote();
-	r->create();
-	if(r == NULL)
-		l->out->printMessage(output::ERRO,
-				"Unable to create the remote object");
-	else
-	{
-		int ret = r->listAvailableInterfaces();
-        QString s = QObject::tr("Remote connection initialized with ") +
-			QString::number(ret) + QObject::tr(" connection(s)\n");
-		l->out->printMessage(output::INFO, s);
-		r->establishConnection();
-	}
-
 	// Creating the control panel
 	c = new control();
 	if(c == NULL)
@@ -76,8 +56,42 @@ bool MainWindow::create()
         return false;
 	}
 	c->create();
-	mainWin->addDockWidget(Qt::RightDockWidgetArea, c);
 
+	// Render
+    mainWin->setCentralWidget(v);
+    mainWin->addDockWidget(Qt::BottomDockWidgetArea, l);
+	mainWin->addDockWidget(Qt::RightDockWidgetArea, c);
+	l->out->printMessage(output::VALI, "ASSP Render Finished\n");
+
+	// Try to establish the remote connection
+	r = new remote();
+	r->create();
+	if(r == NULL)
+	{
+		l->out->printMessage(output::ERRO,
+				"Unable to create the remote object");
+		return false;
+	}
+	else
+	{
+		int ret = r->listAvailableInterfaces();
+        QString s = QObject::tr("Remote connection initialized with ") +
+			QString::number(ret) + QObject::tr(" connection(s)\n");
+		l->out->printMessage(output::INFO, s);
+		ret = r->establishConnection();
+		if(ret<0)
+		{
+			l->out->printMessage(output::INFO, "No connection established\n");
+			l->out->printMessage(output::INFO, QString(
+						QObject::tr(" -> Return code ") + QString::number(ret)
+						+ "\n"));
+			return true;
+		}
+		l->out->printMessage(output::VALI, QString(
+					QObject::tr("Connect established with serial connection ")
+					+ QString::number(ret) + "\n"));
+		refreshControlPanel(ret);
+	}
     return true;
 }
 
@@ -85,12 +99,23 @@ void MainWindow::show()
 {
     mainWin->showMaximized();
 }
-/*
-bool MainWindow::initControls()
+
+void MainWindow::refreshControlPanel(int conn)
 {
-	//dockControls = new QDockWidget("Controls");
+	qint8	dq8;
+	qint16	dq16;
+	QString	dqs;
+
+	// Port Name
+	dqs = r->getPortName(conn);
+	if(dqs.size() < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to the port name");
+		return;
+	}
+	c->setPortName(dqs);
 }
-*/
+
 void MainWindow::startManualMode()
 {
     QMessageBox msgB(QMessageBox::NoIcon, "Something",

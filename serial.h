@@ -11,12 +11,12 @@ class serial
 public:
     serial();
     ~serial();
-    int	listAvailableInterfaces();
-	int	tryToConnect(int);
-    int	lpii;
+    int				listAvailableInterfaces();
+	int				tryToConnect(int);
+    QSerialPortInfo	lpi[256];
+    int				lpii;
 private:
 	int	checkAllowedVersion(qint8, qint8);
-    QSerialPortInfo lpi[256];
 	QSerialPort*	pi;
 };
 
