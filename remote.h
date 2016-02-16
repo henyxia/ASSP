@@ -27,7 +27,8 @@ public:
 	int		establishConnection();
 	int		listAvailableInterfaces();
 	QString	getPortName(int);
-	qint16	getPortSpeed(int);
+	qint16	getPortSpeed();
+	qint16	getVersion();
 
 private:
 	serial*	s;

@@ -102,3 +102,22 @@ qint16 serial::getBaudRate()
 {
 	return pi->baudRate();
 }
+
+qint32 serial::requestGet(qint8 req)
+{
+	qint32		dIn = 0;
+	QByteArray	dOut(1, (char)req);
+    QByteArray	raw;
+    
+	pi->write(dOut);
+	if(pi->waitForReadyRead(500))
+	{
+        raw = pi->readAll();
+		dIn += raw[0] << 4;
+		dIn += raw[1] << 12;
+		dIn += raw[2] << 20;
+		return dIn;
+	}
+	else
+		return -1;
+}

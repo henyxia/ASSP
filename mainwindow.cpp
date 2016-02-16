@@ -110,19 +110,49 @@ void MainWindow::refreshControlPanel(int conn)
 	dqs = r->getPortName(conn);
 	if(dqs.size() < 0)
 	{
-		l->out->printMessage(output::ERRO, "Unable to the port name");
+		l->out->printMessage(output::ERRO, "Unable to get the port name");
 		return;
 	}
 	c->setPortName(dqs);
 
 	// Port Speed
-	dq16 = r->getPortSpeed(conn);
+	dq16 = r->getPortSpeed();
 	if(dq16 <= 0)
 	{
-		l->out->printMessage(output::ERRO, "Unable to the port speed");
+		l->out->printMessage(output::ERRO, "Unable to get the port speed");
 		return;
 	}
 	c->setPortSpeed(dq16);
+
+	// X Pos
+	//dq16 = r->getPositionX();
+
+	// Y Pos
+	//dq16 = r->getPositionY();
+
+	// Z Pos
+	//dq16 = r->getPositionZ();
+
+	// Z Target
+	//dq16 = r->getTargetZ();
+	
+	// Speed Timeout (ToDo XYZR)
+	//dq8 = r->getSpeedTimeout();
+
+	// Pump
+	//dq8 = r->getPumpState();
+	
+	// Locks
+	//dq8 = r->getLockState();
+
+	// Version
+	dq16 = r->getVersion();
+	if(dq16 <= 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get the running version");
+		return;
+	}
+	c->setVersion(dq16 & 0x00FF, (dq16 & 0x0F00)>>8);
 }
 
 void MainWindow::startManualMode()
