@@ -62,3 +62,11 @@ qint16 remote::getPositionX()
 	QByteArray	versionQuery(1, (char)0x08);
 	return s->requestGet(versionQuery[0]);
 }
+
+void remote::setPositionX(qint16 pos)
+{
+	QByteArray	destQ(3, (char)0x00);
+	destQ[1] = (char) ((pos & 0xFF00) >> 8);
+	destQ[2] = (char) (pos & 0x00FF);
+	s->requestSet(destQ, 3);
+}

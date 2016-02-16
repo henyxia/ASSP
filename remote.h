@@ -31,6 +31,7 @@ public:
 	qint16	getPortSpeed();
 	qint8	getPumpState();
 	qint16	getVersion();
+	void	setPositionX(qint16);
 
 private:
 	serial*	s;

@@ -17,6 +17,8 @@ public:
     int				lpii;
 	qint16			getBaudRate();
 	qint32			requestGet(qint8);
+	//TODO
+	void			requestSet(QByteArray, int);
 
 private:
 	int	checkAllowedVersion(qint8, qint8);

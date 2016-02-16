@@ -121,3 +121,19 @@ qint32 serial::requestGet(qint8 req)
 	else
 		return -1;
 }
+
+void serial::requestSet(QByteArray req, int size)
+{
+	//TODO
+
+	QByteArray	d1(1, (char)req[0]);
+	QByteArray	d2(1, (char)req[1]);
+	QByteArray	d3(1, (char)req[2]);
+
+	pi->write(d1);
+	pi->waitForReadyRead(500);
+	pi->write(d2);
+	pi->waitForReadyRead(500);
+	pi->write(d3);
+	pi->waitForReadyRead(500);
+}
