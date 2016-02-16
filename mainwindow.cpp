@@ -114,6 +114,15 @@ void MainWindow::refreshControlPanel(int conn)
 		return;
 	}
 	c->setPortName(dqs);
+
+	// Port Speed
+	dq16 = r->getPortSpeed(conn);
+	if(dq16 <= 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to the port speed");
+		return;
+	}
+	c->setPortSpeed(dq16);
 }
 
 void MainWindow::startManualMode()

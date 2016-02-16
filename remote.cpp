@@ -39,3 +39,8 @@ QString remote::getPortName(int conn)
 {
 	return s->lpi[conn].portName();
 }
+
+qint16 remote::getPortSpeed(int conn)
+{
+	return s->getBaudRate();
+}

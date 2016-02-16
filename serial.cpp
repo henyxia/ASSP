@@ -97,3 +97,8 @@ int serial::checkAllowedVersion(qint8 maj, qint8 min)
 		return 0;
 	return -1;
 }
+
+qint16 serial::getBaudRate()
+{
+	return pi->baudRate();
+}

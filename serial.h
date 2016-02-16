@@ -15,6 +15,8 @@ public:
 	int				tryToConnect(int);
     QSerialPortInfo	lpi[256];
     int				lpii;
+	qint16			getBaudRate();
+
 private:
 	int	checkAllowedVersion(qint8, qint8);
 	QSerialPort*	pi;
