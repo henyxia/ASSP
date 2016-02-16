@@ -24,7 +24,6 @@ void control::create()
 	QWidget*		wLay6 = new QWidget;
 	QWidget*		wLay7 = new QWidget;
 	QWidget*		wLay8 = new QWidget;
-	QWidget*		wLay9 = new QWidget;
 	QVBoxLayout*	mainLayout = new QVBoxLayout;
 	QHBoxLayout*	lay1 = new QHBoxLayout;
 	QHBoxLayout*	lay2 = new QHBoxLayout;
@@ -34,7 +33,6 @@ void control::create()
 	QHBoxLayout*	lay6 = new QHBoxLayout;
 	QHBoxLayout*	lay7 = new QHBoxLayout;
 	QHBoxLayout*	lay8 = new QHBoxLayout;
-	QHBoxLayout*	lay9 = new QHBoxLayout;
 
 	// Layer 1
 	QPushButton *bConnect = new QPushButton("Connect");
@@ -63,8 +61,20 @@ void control::create()
 	xPos = new QLineEdit;
 	xPos->setReadOnly(true);
 	xPos->setPlaceholderText("NA");
+	xTarget = new QLineEdit;
+	xTarget->setReadOnly(true);
+	xTarget->setPlaceholderText("NA");
+	xMS = new QLineEdit;
+	xMS->setReadOnly(true);
+	xMS->setPlaceholderText("NA");
+	xTimeout = new QLineEdit;
+	xTimeout->setReadOnly(true);
+	xTimeout->setPlaceholderText("NA");
 	lay3->addWidget(l3lab1);
 	lay3->addWidget(xPos);
+	lay3->addWidget(xTarget);
+	lay3->addWidget(xMS);
+	lay3->addWidget(xTimeout);
 	wLay3->setLayout(lay3);
 	mainLayout->addWidget(wLay3);
 
@@ -73,8 +83,20 @@ void control::create()
 	yPos = new QLineEdit;
 	yPos->setReadOnly(true);
 	yPos->setPlaceholderText("NA");
+	yTarget = new QLineEdit;
+	yTarget->setReadOnly(true);
+	yTarget->setPlaceholderText("NA");
+	yMS = new QLineEdit;
+	yMS->setReadOnly(true);
+	yMS->setPlaceholderText("NA");
+	yTimeout = new QLineEdit;
+	yTimeout->setReadOnly(true);
+	yTimeout->setPlaceholderText("NA");
 	lay4->addWidget(l4lab1);
 	lay4->addWidget(yPos);
+	lay4->addWidget(yTarget);
+	lay4->addWidget(yMS);
+	lay4->addWidget(yTimeout);
 	wLay4->setLayout(lay4);
 	mainLayout->addWidget(wLay4);
 
@@ -83,46 +105,48 @@ void control::create()
 	zPos = new QLineEdit;
 	zPos->setReadOnly(true);
 	zPos->setPlaceholderText("NA");
+	zTarget = new QLineEdit;
+	zTarget->setReadOnly(true);
+	zTarget->setPlaceholderText("NA");
+	zMS = new QLineEdit;
+	zMS->setReadOnly(true);
+	zMS->setPlaceholderText("NA");
+	zTimeout = new QLineEdit;
+	zTimeout->setReadOnly(true);
+	zTimeout->setPlaceholderText("NA");
 	lay5->addWidget(l5lab1);
 	lay5->addWidget(zPos);
+	lay5->addWidget(zTarget);
+	lay5->addWidget(zMS);
+	lay5->addWidget(zTimeout);
 	wLay5->setLayout(lay5);
 	mainLayout->addWidget(wLay5);
 
 	// Layer 6
-	QLabel* l6lab1 = new QLabel("Z Target");
-	zTarget = new QLineEdit;
-	zTarget->setReadOnly(true);
-	zTarget->setPlaceholderText("NA");
+	QLabel* l6lab1 = new QLabel("Pump State");
+	pumpState = new QLineEdit;
+	pumpState->setReadOnly(true);
+	pumpState->setPlaceholderText("NA");
 	lay6->addWidget(l6lab1);
-	lay6->addWidget(zTarget);
+	lay6->addWidget(pumpState);
 	wLay6->setLayout(lay6);
 	mainLayout->addWidget(wLay6);
 
 	// Layer 7
-	QLabel* l7lab1 = new QLabel("Pump State");
-	pumpState = new QLineEdit;
-	pumpState->setReadOnly(true);
-	pumpState->setPlaceholderText("NA");
+	QLabel* l7lab1 = new QLabel("Locks");
 	lay7->addWidget(l7lab1);
-	lay7->addWidget(pumpState);
 	wLay7->setLayout(lay7);
 	mainLayout->addWidget(wLay7);
 
 	// Layer 8
-	QLabel* l8lab1 = new QLabel("Locks");
-	lay8->addWidget(l8lab1);
-	wLay8->setLayout(lay8);
-	mainLayout->addWidget(wLay8);
-
-	// Layer 9
-	QLabel* l9lab1 = new QLabel("Version");
+	QLabel* l8lab1 = new QLabel("Version");
 	version = new QLineEdit;
 	version->setReadOnly(true);
 	version->setPlaceholderText("NA");
-	lay9->addWidget(l9lab1);
-	lay9->addWidget(version);
-	wLay9->setLayout(lay9);
-	mainLayout->addWidget(wLay9);
+	lay8->addWidget(l8lab1);
+	lay8->addWidget(version);
+	wLay8->setLayout(lay8);
+	mainLayout->addWidget(wLay8);
 
 	// Final Rendering
 	mainLayout->setAlignment(Qt::AlignTop);
@@ -158,19 +182,69 @@ void control::setPositionZ(qint16 pos)
 	zPos->setPlaceholderText(QString::number(pos));
 }
 
+void control::setPositionR(qint16 pos)
+{
+	rPos->setPlaceholderText(QString::number(pos));
+}
+
+void control::setTargetX(qint16 pos)
+{
+	xTarget->setPlaceholderText(QString::number(pos));
+}
+
+void control::setTargetY(qint16 pos)
+{
+	yTarget->setPlaceholderText(QString::number(pos));
+}
+
 void control::setTargetZ(qint16 pos)
 {
 	zTarget->setPlaceholderText(QString::number(pos));
 }
 
-void control::setSpeedTimeout(qint8 sp)
+void control::setTargetR(qint16 pos)
 {
-	speedTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+	rTarget->setPlaceholderText(QString::number(pos));
 }
 
-void control::setMicroStep(qint8 microS)
+void control::setSpeedX(qint8 sp)
 {
-	ms->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+	xMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+}
+
+void control::setSpeedY(qint8 sp)
+{
+	yMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+}
+
+void control::setSpeedZ(qint8 sp)
+{
+	zMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+}
+
+void control::setSpeedR(qint8 sp)
+{
+	rMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+}
+
+void control::setMSX(qint8 microS)
+{
+	xMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+}
+
+void control::setMSY(qint8 microS)
+{
+	yMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+}
+
+void control::setMSZ(qint8 microS)
+{
+	zMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+}
+
+void control::setMSR(qint8 microS)
+{
+	rMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
 }
 
 void control::setPumpState(bool st)
