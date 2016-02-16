@@ -127,8 +127,58 @@ void control::create()
 	// Final Rendering
 	mainLayout->setAlignment(Qt::AlignTop);
 	contentContainer->setLayout(mainLayout);
-	this->setMinimumWidth(150);
-	this->setMaximumWidth(150);
+	this->setMinimumWidth(250);
+	this->setMaximumWidth(250);
 	this->setWidget(contentContainer);
 	this->show();
+}
+
+void control::setPortName(QString pn)
+{
+	portName->setPlaceholderText(pn);
+}
+
+void control::setPortSpeed(int sp)
+{
+	portSpeed->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" BPS")));
+}
+
+void control::setPositionX(qint16 pos)
+{
+	xPos->setPlaceholderText(QString::number(pos));
+}
+
+void control::setPositionY(qint16 pos)
+{
+	yPos->setPlaceholderText(QString::number(pos));
+}
+
+void control::setPositionZ(qint16 pos)
+{
+	zPos->setPlaceholderText(QString::number(pos));
+}
+
+void control::setTargetZ(qint16 pos)
+{
+	zTarget->setPlaceholderText(QString::number(pos));
+}
+
+void control::setSpeedTimeout(qint8 sp)
+{
+	speedTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+}
+
+void control::setMicroStep(qint8 microS)
+{
+	ms->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+}
+
+void control::setPumpState(bool st)
+{
+	pumpState->setPlaceholderText(st ? "On" : "Off");
+}
+
+void control::setVersion(qint8 major, qint8 minor)
+{
+	version->setPlaceholderText(QString(QString::number(major) + QObject::tr(".") + QString::number(minor)));
 }

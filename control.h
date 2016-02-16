@@ -13,6 +13,16 @@ public:
 	control();
 	~control();
 	void	create();
+	void	setPortName		(QString);
+	void	setPortSpeed	(int);
+	void	setPositionX	(qint16);
+	void	setPositionY	(qint16);
+	void	setPositionZ	(qint16);
+	void	setTargetZ		(qint16);
+	void	setSpeedTimeout	(qint8);
+	void	setMicroStep	(qint8);
+	void	setPumpState	(bool);
+	void	setVersion		(qint8, qint8);
 
 private:
 	QLineEdit*	portName;

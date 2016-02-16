@@ -30,6 +30,7 @@ class MainWindow : public QObject
     // Private
     private:
 	bool			initMenuBar	(QWidget*);
+	void			refreshControlPanel(void);
 
 	QMainWindow*	mainWin;
 	QMenuBar*		menu;
