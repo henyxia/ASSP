@@ -140,7 +140,13 @@ void MainWindow::refreshControlPanel(int conn)
 	//dq8 = r->getSpeedTimeout();
 
 	// Pump
-	//dq8 = r->getPumpState();
+	dq8 = r->getPumpState();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get the pump state");
+		return;
+	}
+	c->setPumpState((dq8 & 0x10) == 0x10);
 	
 	// Locks
 	//dq8 = r->getLockState();

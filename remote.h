@@ -28,6 +28,7 @@ public:
 	int		listAvailableInterfaces();
 	QString	getPortName(int);
 	qint16	getPortSpeed();
+	qint8	getPumpState();
 	qint16	getVersion();
 
 private:
