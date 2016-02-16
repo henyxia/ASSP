@@ -68,6 +68,62 @@ void control::create()
 	wLay3->setLayout(lay3);
 	mainLayout->addWidget(wLay3);
 
+	// Layer 4
+	QLabel* l4lab1 = new QLabel("Y");
+	yPos = new QLineEdit;
+	yPos->setReadOnly(true);
+	yPos->setPlaceholderText("NA");
+	lay4->addWidget(l4lab1);
+	lay4->addWidget(yPos);
+	wLay4->setLayout(lay4);
+	mainLayout->addWidget(wLay4);
+
+	// Layer 5
+	QLabel* l5lab1 = new QLabel("Z");
+	zPos = new QLineEdit;
+	zPos->setReadOnly(true);
+	zPos->setPlaceholderText("NA");
+	lay5->addWidget(l5lab1);
+	lay5->addWidget(zPos);
+	wLay5->setLayout(lay5);
+	mainLayout->addWidget(wLay5);
+
+	// Layer 6
+	QLabel* l6lab1 = new QLabel("Z Target");
+	zTarget = new QLineEdit;
+	zTarget->setReadOnly(true);
+	zTarget->setPlaceholderText("NA");
+	lay6->addWidget(l6lab1);
+	lay6->addWidget(zTarget);
+	wLay6->setLayout(lay6);
+	mainLayout->addWidget(wLay6);
+
+	// Layer 7
+	QLabel* l7lab1 = new QLabel("Pump State");
+	pumpState = new QLineEdit;
+	pumpState->setReadOnly(true);
+	pumpState->setPlaceholderText("NA");
+	lay7->addWidget(l7lab1);
+	lay7->addWidget(pumpState);
+	wLay7->setLayout(lay7);
+	mainLayout->addWidget(wLay7);
+
+	// Layer 8
+	QLabel* l8lab1 = new QLabel("Locks");
+	lay8->addWidget(l8lab1);
+	wLay8->setLayout(lay8);
+	mainLayout->addWidget(wLay8);
+
+	// Layer 9
+	QLabel* l9lab1 = new QLabel("Version");
+	version = new QLineEdit;
+	version->setReadOnly(true);
+	version->setPlaceholderText("NA");
+	lay9->addWidget(l9lab1);
+	lay9->addWidget(version);
+	wLay9->setLayout(lay9);
+	mainLayout->addWidget(wLay9);
+
 	// Final Rendering
 	mainLayout->setAlignment(Qt::AlignTop);
 	contentContainer->setLayout(mainLayout);
