@@ -4,7 +4,7 @@
 
 // Includes
 #include <QDockWidget>
-#include <QTextEdit>
+#include <QLineEdit>
 #include <QVBoxLayout>
 
 class control : public QDockWidget
@@ -15,7 +15,16 @@ public:
 	void	create();
 
 private:
-	QVBoxLayout*	mainLayout;
+	QLineEdit*	portName;
+	QLineEdit*	portSpeed;
+	QLineEdit*	xPos;
+	QLineEdit*	yPos;
+	QLineEdit*	zPos;
+	QLineEdit*	zTarget;
+	QLineEdit*	speedTimeout;
+	QLineEdit*	ms;
+	QLineEdit*	pumpState;
+	QLineEdit*	version;
 };
 
 #endif
