@@ -26,6 +26,7 @@ public:
 	bool	create();
 	int		establishConnection();
 	int		listAvailableInterfaces();
+	qint16	getPositionX();
 	QString	getPortName(int);
 	qint16	getPortSpeed();
 	qint8	getPumpState();

@@ -56,3 +56,9 @@ qint8 remote::getPumpState()
 	QByteArray	versionQuery(1, (char)0x0A);
 	return s->requestGet(versionQuery[0]);
 }
+
+qint16 remote::getPositionX()
+{
+	QByteArray	versionQuery(1, (char)0x08);
+	return s->requestGet(versionQuery[0]);
+}

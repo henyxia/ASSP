@@ -119,13 +119,19 @@ void MainWindow::refreshControlPanel(int conn)
 	dq16 = r->getPortSpeed();
 	if(dq16 <= 0)
 	{
-		l->out->printMessage(output::ERRO, "Unable to get the port speed");
+		l->out->printMessage(output::ERRO, "Unable to get the port speed\n");
 		return;
 	}
 	c->setPortSpeed(dq16);
 
 	// X Pos
-	//dq16 = r->getPositionX();
+	dq16 = r->getPositionX();
+	if(dq16 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get X position\n");
+		return;
+	}
+	c->setPositionX(dq16 >> 8);
 
 	// Y Pos
 	//dq16 = r->getPositionY();
@@ -143,7 +149,7 @@ void MainWindow::refreshControlPanel(int conn)
 	dq8 = r->getPumpState();
 	if(dq8 < 0)
 	{
-		l->out->printMessage(output::ERRO, "Unable to get the pump state");
+		l->out->printMessage(output::ERRO, "Unable to get the pump state\n");
 		return;
 	}
 	c->setPumpState((dq8 & 0x10) == 0x10);
