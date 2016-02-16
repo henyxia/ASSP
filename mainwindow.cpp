@@ -167,7 +167,7 @@ void MainWindow::refreshControlPanel(int conn)
 	c->setVersion(dq16 & 0x00FF, (dq16 & 0x0F00)>>8);
 
 	//TEMP
-	r->setPositionX(0);
+	r->setPositionX(1000);
 }
 
 void MainWindow::startManualMode()
