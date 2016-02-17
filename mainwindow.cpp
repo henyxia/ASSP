@@ -1,6 +1,7 @@
 // Includes
 #include "mainwindow.h"
 #include <QMessageBox>
+#include <QDialogButtonBox>
 #include <QObject>
 
 MainWindow::MainWindow()
@@ -13,6 +14,42 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
+}
+
+bool MainWindow::eventFilter(QObject *obj, QEvent *event)
+{
+	if(event->type() == QEvent::MouseButtonDblClick)
+	{
+		QDialog dlg;
+        QVBoxLayout la(&dlg);
+		//TODO
+		// Add number only input
+        QLineEdit ed;
+        la.addWidget(&ed);
+        QDialogButtonBox bb;
+		bb.addButton(tr("OK"), QDialogButtonBox::AcceptRole);
+        la.addWidget(&bb);
+
+		// Connecting
+		connect(&bb, SIGNAL(accepted()), &dlg, SLOT(accept()));
+
+        dlg.setLayout(&la);
+        if(dlg.exec() == QDialog::Accepted)
+		{
+			if(obj == c->xTarget)
+				r->setPositionX(ed.text().toInt());
+			else if(obj == c->yTarget)
+				r->setPositionY(ed.text().toInt());
+			else if(obj == c->zTarget)
+				r->setPositionZ(ed.text().toInt());
+			else if(obj == c->rTarget)
+				r->setPositionR(ed.text().toInt());
+		}
+	    return true;
+	}
+
+    // Standard event processing
+    return QObject::eventFilter(obj, event);
 }
 
 bool MainWindow::create()
@@ -85,14 +122,33 @@ bool MainWindow::create()
 			l->out->printMessage(output::INFO, QString(
 						QObject::tr(" -> Return code ") + QString::number(ret)
 						+ "\n"));
-			return true;
 		}
-		l->out->printMessage(output::VALI, QString(
-					QObject::tr("Connect established with serial connection ")
-					+ QString::number(ret) + "\n"));
-		refreshControlPanel(ret);
+		else
+		{
+			l->out->printMessage(output::VALI, QString(
+				QObject::tr("Connect established with serial connection ")
+				+ QString::number(ret) + "\n"));
+			refreshControlPanel(ret);
+		}
 	}
+
+	// Establishing connections
+	c->xTarget->installEventFilter(this);
+	c->yTarget->installEventFilter(this);
+	c->zTarget->installEventFilter(this);
+	//TODO
+	//c->rTarget->installEventFilter(this);
+
     return true;
+}
+
+void MainWindow::changeTarget(void)
+{
+	int ret = c->xTarget->text().toInt();
+	l->out->printMessage(output::VALI, QString(
+		QObject::tr("Setting new X Target ")
+		+ QString::number(ret) + "\n"));
+	r->setPositionX(c->xTarget->text().toInt());
 }
 
 void MainWindow::show()

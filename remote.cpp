@@ -70,3 +70,27 @@ void remote::setPositionX(qint16 pos)
 	destQ[2] = (char) (pos & 0x00FF);
 	s->requestSet(destQ, 3);
 }
+
+void remote::setPositionY(qint16 pos)
+{
+	QByteArray	destQ(3, (char)0x10);
+	destQ[1] = (char) ((pos & 0xFF00) >> 8);
+	destQ[2] = (char) (pos & 0x00FF);
+	s->requestSet(destQ, 3);
+}
+
+void remote::setPositionZ(qint16 pos)
+{
+	QByteArray	destQ(3, (char)0x20);
+	destQ[1] = (char) ((pos & 0xFF00) >> 8);
+	destQ[2] = (char) (pos & 0x00FF);
+	s->requestSet(destQ, 3);
+}
+
+void remote::setPositionR(qint16 pos)
+{
+	QByteArray	destQ(3, (char)0x30);
+	destQ[1] = (char) ((pos & 0xFF00) >> 8);
+	destQ[2] = (char) (pos & 0x00FF);
+	s->requestSet(destQ, 3);
+}

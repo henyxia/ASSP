@@ -32,6 +32,9 @@ public:
 	qint8	getPumpState();
 	qint16	getVersion();
 	void	setPositionX(qint16);
+	void	setPositionY(qint16);
+	void	setPositionZ(qint16);
+	void	setPositionR(qint16);
 
 private:
 	serial*	s;

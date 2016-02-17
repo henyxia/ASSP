@@ -29,8 +29,10 @@ class MainWindow : public QObject
 
     // Private
     private:
-	bool			initMenuBar	(QWidget*);
-	void			refreshControlPanel(int);
+	void	changeTarget(void);
+	bool	initMenuBar	(QWidget*);
+	void	refreshControlPanel(int);
+	bool	eventFilter(QObject*, QEvent*);
 
 	QMainWindow*	mainWin;
 	QMenuBar*		menu;
