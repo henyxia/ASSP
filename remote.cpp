@@ -63,6 +63,24 @@ qint16 remote::getPositionX()
 	return s->requestGet(versionQuery[0]);
 }
 
+qint16 remote::getPositionY()
+{
+	QByteArray	versionQuery(1, (char)0x18);
+	return s->requestGet(versionQuery[0]);
+}
+
+qint16 remote::getPositionZ()
+{
+	QByteArray	versionQuery(1, (char)0x28);
+	return s->requestGet(versionQuery[0]);
+}
+
+qint16 remote::getPositionR()
+{
+	QByteArray	versionQuery(1, (char)0x38);
+	return s->requestGet(versionQuery[0]);
+}
+
 void remote::setPositionX(qint16 pos)
 {
 	QByteArray	destQ(3, (char)0x00);

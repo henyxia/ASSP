@@ -27,6 +27,9 @@ public:
 	int		establishConnection();
 	int		listAvailableInterfaces();
 	qint16	getPositionX();
+	qint16	getPositionY();
+	qint16	getPositionZ();
+	qint16	getPositionR();
 	QString	getPortName(int);
 	qint16	getPortSpeed();
 	qint8	getPumpState();

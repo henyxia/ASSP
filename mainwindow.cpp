@@ -190,6 +190,33 @@ void MainWindow::refreshControlPanel(int conn)
 	c->setPositionX(dq16 >> 8);
 
 	// Y Pos
+	dq16 = r->getPositionY();
+	if(dq16 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get Y position\n");
+		return;
+	}
+	c->setPositionY(dq16 >> 8);
+
+	// Z Pos
+	dq16 = r->getPositionZ();
+	if(dq16 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get Z position\n");
+		return;
+	}
+	c->setPositionZ(dq16 >> 8);
+
+	// R Pos
+	dq16 = r->getPositionR();
+	if(dq16 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get R position\n");
+		return;
+	}
+	c->setPositionR(dq16 >> 8);
+
+	// Y Pos
 	//dq16 = r->getPositionY();
 
 	// Z Pos
