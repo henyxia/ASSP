@@ -75,6 +75,12 @@ qint16 remote::getPositionZ()
 	return s->requestGet(versionQuery[0]);
 }
 
+qint16 remote::getMicroStepXYZR()
+{
+	QByteArray	versionQuery(1, (char)0x09);
+	return s->requestGet(versionQuery[0]);
+}
+
 qint16 remote::getPositionR()
 {
 	QByteArray	versionQuery(1, (char)0x38);

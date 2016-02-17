@@ -39,6 +39,7 @@ public:
 	QLineEdit*	rTarget;
 
 private:
+	qint8		pov(qint8);
 	QLineEdit*	portName;
 	QLineEdit*	portSpeed;
 	QLineEdit*	xPos;

@@ -26,6 +26,7 @@ public:
 	bool	create();
 	int		establishConnection();
 	int		listAvailableInterfaces();
+	qint16	getMicroStepXYZR();
 	qint16	getPositionX();
 	qint16	getPositionY();
 	qint16	getPositionZ();

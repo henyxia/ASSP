@@ -253,22 +253,22 @@ void control::setSpeedR(qint8 sp)
 
 void control::setMSX(qint8 microS)
 {
-	xMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+	xMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(pov(microS))));
 }
 
 void control::setMSY(qint8 microS)
 {
-	yMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+	yMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(pov(microS))));
 }
 
 void control::setMSZ(qint8 microS)
 {
-	zMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+	zMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(pov(microS))));
 }
 
 void control::setMSR(qint8 microS)
 {
-	rMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(microS)));
+	rMS->setPlaceholderText(QString(QObject::tr("1/") + QString::number(pov(microS))));
 }
 
 void control::setPumpState(bool st)
@@ -279,4 +279,11 @@ void control::setPumpState(bool st)
 void control::setVersion(qint8 major, qint8 minor)
 {
 	version->setPlaceholderText(QString(QString::number(major) + QObject::tr(".") + QString::number(minor)));
+}
+
+qint8 control::pov(qint8 ms)
+{
+	if(ms == 0)
+		return 1;
+	return ms*pov(ms-1);
 }

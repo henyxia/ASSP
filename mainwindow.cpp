@@ -216,17 +216,23 @@ void MainWindow::refreshControlPanel(int conn)
 	}
 	c->setPositionR(dq16 >> 8);
 
-	// Y Pos
-	//dq16 = r->getPositionY();
+	// Targets
+	c->setTargetX(0);
+	c->setTargetY(0);
+	c->setTargetZ(0);
+	c->setTargetR(0);
 
-	// Z Pos
-	//dq16 = r->getPositionZ();
-
-	// Z Target
-	//dq16 = r->getTargetZ();
-	
-	// Speed Timeout (ToDo XYZR)
-	//dq8 = r->getSpeedTimeout();
+	// MS
+	dq16 = r->getMicroStepXYZR();
+	if(dq16 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get XYZR microsteps\n");
+		return;
+	}
+	c->setMSX(dq16 & 0x0007);
+	c->setMSY((dq16 & 0x0038) >> 3);
+	c->setMSZ((dq16 & 0x01C0) >> 6);
+	c->setMSR((dq16 & 0x1E00) >> 9);
 
 	// Pump
 	dq8 = r->getPumpState();
