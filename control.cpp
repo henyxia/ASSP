@@ -24,6 +24,7 @@ void control::create()
 	QWidget*		wLay6 = new QWidget;
 	QWidget*		wLay7 = new QWidget;
 	QWidget*		wLay8 = new QWidget;
+	QWidget*		wLay9 = new QWidget;
 	QVBoxLayout*	mainLayout = new QVBoxLayout;
 	QHBoxLayout*	lay1 = new QHBoxLayout;
 	QHBoxLayout*	lay2 = new QHBoxLayout;
@@ -33,6 +34,7 @@ void control::create()
 	QHBoxLayout*	lay6 = new QHBoxLayout;
 	QHBoxLayout*	lay7 = new QHBoxLayout;
 	QHBoxLayout*	lay8 = new QHBoxLayout;
+	QHBoxLayout*	lay9 = new QHBoxLayout;
 
 	// Layer 1
 	QPushButton *bConnect = new QPushButton("Connect");
@@ -123,30 +125,52 @@ void control::create()
 	mainLayout->addWidget(wLay5);
 
 	// Layer 6
-	QLabel* l6lab1 = new QLabel("Pump State");
-	pumpState = new QLineEdit;
-	pumpState->setReadOnly(true);
-	pumpState->setPlaceholderText("NA");
+	QLabel* l6lab1 = new QLabel("R");
+	rPos = new QLineEdit;
+	rPos->setReadOnly(true);
+	rPos->setPlaceholderText("NA");
+	rTarget = new QLineEdit;
+	rTarget->setReadOnly(true);
+	rTarget->setPlaceholderText("NA");
+	rMS = new QLineEdit;
+	rMS->setReadOnly(true);
+	rMS->setPlaceholderText("NA");
+	rTimeout = new QLineEdit;
+	rTimeout->setReadOnly(true);
+	rTimeout->setPlaceholderText("NA");
 	lay6->addWidget(l6lab1);
-	lay6->addWidget(pumpState);
+	lay6->addWidget(rPos);
+	lay6->addWidget(rTarget);
+	lay6->addWidget(rMS);
+	lay6->addWidget(rTimeout);
 	wLay6->setLayout(lay6);
 	mainLayout->addWidget(wLay6);
 
 	// Layer 7
-	QLabel* l7lab1 = new QLabel("Locks");
+	QLabel* l7lab1 = new QLabel("Pump State");
+	pumpState = new QLineEdit;
+	pumpState->setReadOnly(true);
+	pumpState->setPlaceholderText("NA");
 	lay7->addWidget(l7lab1);
+	lay7->addWidget(pumpState);
 	wLay7->setLayout(lay7);
 	mainLayout->addWidget(wLay7);
 
 	// Layer 8
-	QLabel* l8lab1 = new QLabel("Version");
+	QLabel* l8lab1 = new QLabel("Locks");
+	lay8->addWidget(l8lab1);
+	wLay8->setLayout(lay8);
+	mainLayout->addWidget(wLay8);
+
+	// Layer 9
+	QLabel* l9lab1 = new QLabel("Version");
 	version = new QLineEdit;
 	version->setReadOnly(true);
 	version->setPlaceholderText("NA");
-	lay8->addWidget(l8lab1);
-	lay8->addWidget(version);
-	wLay8->setLayout(lay8);
-	mainLayout->addWidget(wLay8);
+	lay9->addWidget(l9lab1);
+	lay9->addWidget(version);
+	wLay9->setLayout(lay9);
+	mainLayout->addWidget(wLay9);
 
 	// Final Rendering
 	mainLayout->setAlignment(Qt::AlignTop);
