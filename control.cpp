@@ -233,22 +233,22 @@ void control::setTargetR(qint16 pos)
 
 void control::setSpeedX(qint8 sp)
 {
-	xMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+	xTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
 }
 
 void control::setSpeedY(qint8 sp)
 {
-	yMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+	yTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
 }
 
 void control::setSpeedZ(qint8 sp)
 {
-	zMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+	zTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
 }
 
 void control::setSpeedR(qint8 sp)
 {
-	rMS->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
+	rTimeout->setPlaceholderText(QString(QString::number(sp) + QObject::tr(" ms")));
 }
 
 void control::setMSX(qint8 microS)

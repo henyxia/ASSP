@@ -118,3 +118,27 @@ void remote::setPositionR(qint16 pos)
 	destQ[2] = (char) (pos & 0x00FF);
 	s->requestSet(destQ, 3);
 }
+
+qint8 remote::getSpeedX()
+{
+	QByteArray	versionQuery(1, (char)0x0E);
+	return s->requestGet(versionQuery[0]);
+}
+
+qint8 remote::getSpeedY()
+{
+	QByteArray	versionQuery(1, (char)0x1E);
+	return s->requestGet(versionQuery[0]);
+}
+
+qint8 remote::getSpeedZ()
+{
+	QByteArray	versionQuery(1, (char)0x2E);
+	return s->requestGet(versionQuery[0]);
+}
+
+qint8 remote::getSpeedR()
+{
+	QByteArray	versionQuery(1, (char)0x3E);
+	return s->requestGet(versionQuery[0]);
+}

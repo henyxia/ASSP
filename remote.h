@@ -34,6 +34,10 @@ public:
 	QString	getPortName(int);
 	qint16	getPortSpeed();
 	qint8	getPumpState();
+	qint8	getSpeedX();
+	qint8	getSpeedY();
+	qint8	getSpeedZ();
+	qint8	getSpeedR();
 	qint16	getVersion();
 	void	setPositionX(qint16);
 	void	setPositionY(qint16);

@@ -136,8 +136,7 @@ bool MainWindow::create()
 	c->xTarget->installEventFilter(this);
 	c->yTarget->installEventFilter(this);
 	c->zTarget->installEventFilter(this);
-	//TODO
-	//c->rTarget->installEventFilter(this);
+	c->rTarget->installEventFilter(this);
 
     return true;
 }
@@ -232,7 +231,50 @@ void MainWindow::refreshControlPanel(int conn)
 	c->setMSX(dq16 & 0x0007);
 	c->setMSY((dq16 & 0x0038) >> 3);
 	c->setMSZ((dq16 & 0x01C0) >> 6);
-	c->setMSR((dq16 & 0x1E00) >> 9);
+	c->setMSR((dq16 & 0x1E00) >> 9);	// Speed X
+	dq8 = r->getSpeedX();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get X speed\n");
+		return;
+	}
+	c->setSpeedX(dq8 >> 4);
+
+	// Speed X
+	dq8 = r->getSpeedX();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get X speed\n");
+		return;
+	}
+	c->setSpeedX(dq8 >> 4);
+
+	// Speed X
+	dq8 = r->getSpeedY();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get Y speed\n");
+		return;
+	}
+	c->setSpeedY(dq8 >> 4);
+
+	// Speed Z
+	dq8 = r->getSpeedZ();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get Z speed\n");
+		return;
+	}
+	c->setSpeedZ(dq8 >> 4);
+
+	// Speed X
+	dq8 = r->getSpeedR();
+	if(dq8 < 0)
+	{
+		l->out->printMessage(output::ERRO, "Unable to get R speed\n");
+		return;
+	}
+	c->setSpeedR(dq8 >> 4);
 
 	// Pump
 	dq8 = r->getPumpState();
