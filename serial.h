@@ -16,8 +16,7 @@ public:
     QSerialPortInfo	lpi[256];
     int				lpii;
 	qint16			getBaudRate();
-	qint32			requestGet(qint8);
-	//TODO
+	qint32			requestGet(quint8);
 	void			requestSet(QByteArray, int);
 
 private:

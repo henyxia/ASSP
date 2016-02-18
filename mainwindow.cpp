@@ -158,8 +158,8 @@ void MainWindow::show()
 
 void MainWindow::refreshControlPanel(int conn)
 {
-	qint8	dq8;
-	qint16	dq16;
+	quint8	dq8;
+	quint16	dq16;
 	QString	dqs;
 
 	// Port Name
@@ -248,12 +248,7 @@ void MainWindow::refreshControlPanel(int conn)
 
 	// Version
 	dq16 = r->getVersion();
-	if(dq16 <= 0)
-	{
-		l->out->printMessage(output::ERRO, "Unable to get the running version");
-		return;
-	}
-	c->setVersion(dq16 & 0x00FF, (dq16 & 0x0F00)>>8);
+	c->setVersion((dq16 & 0x0FF0) >> 4, dq16 & 0x000F);
 }
 
 void MainWindow::startManualMode()

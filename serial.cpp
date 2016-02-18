@@ -13,6 +13,9 @@
 // Qt Namespace
 QT_USE_NAMESPACE
 
+// Define
+#define	SERIAL_TIMEOUT	500
+
 // Platform independent sleep
 void qSleep(int ms)
 {
@@ -60,32 +63,30 @@ int serial::listAvailableInterfaces()
 
 int serial::tryToConnect(int spi)
 {
-	int			ret;
-	QByteArray	versionQuery(1, (char)0x0F);
-    QByteArray	raw;
-	qint8		major;
-	qint8		minor;
+	//int			ret;
+	//QByteArray	versionQuery(1, (char)0x0F);
+    //QByteArray	raw;
+	//qint8		major;
+	//qint8		minor;
 
     pi = new QSerialPort(lpi[spi]);
 
     if(!pi->open(QIODevice::ReadWrite))
         return -1;
 	qSleep(2000);
-    pi->write(versionQuery);
+    //pi->write(versionQuery);
 
-    if(pi->waitForReadyRead(100))
-	{
-        raw = pi->readAll();
-		//TODO
-		// Add processing data function
-		minor = raw[0] >> 4;
-		major = raw[1];
-		ret = checkAllowedVersion(major, minor);
-		if(ret != 0)
-			return -1;
-	}
-	else
-		return -2;
+    //if(pi->waitForReadyRead(100))
+	//{
+        //raw = pi->readAll();
+		//minor = raw[0] >> 4;
+		//major = raw[1];
+		//ret = checkAllowedVersion(major, minor);
+		//if(ret != 0)
+			//return -1;
+	//}
+	//else
+		//return -2;
 
     return 0;
 }
@@ -103,22 +104,67 @@ qint16 serial::getBaudRate()
 	return pi->baudRate();
 }
 
-qint32 serial::requestGet(qint8 req)
+qint32 serial::requestGet(quint8 req)
 {
-	qint32		dIn = 0;
+	quint32		dIn = 0;
 	QByteArray	dOut(1, (char)req);
     QByteArray	raw;
     
 	pi->write(dOut);
-	if(pi->waitForReadyRead(500))
+	if(pi->waitForReadyRead(SERIAL_TIMEOUT))
 	{
         raw = pi->readAll();
-		dIn += raw[0] << 4;
-		dIn += raw[1] << 12;
-		dIn += raw[2] << 20;
-		return dIn;
+		if((raw[0] & 0x0F) == 0x0B)
+		{
+			// One more frame
+			dIn += raw[0] >> 4;
+			pi->write(dOut);
+			if(pi->waitForReadyRead(SERIAL_TIMEOUT))
+			{
+				raw = pi->readAll();
+				dIn += raw[0] << 4;
+				return dIn;
+			}
+			else
+				// ERROR
+				return -3;
+		}
+		else if((raw[0] & 0x0F) == 0x0C)
+		{
+			// Two more frame
+			dIn += raw[0] >> 4;
+			pi->write(dOut);
+			if(pi->waitForReadyRead(SERIAL_TIMEOUT))
+			{
+				raw = pi->readAll();
+				dIn += raw[0] << 4;
+				pi->write(dOut);
+				if(pi->waitForReadyRead(SERIAL_TIMEOUT))
+				{
+					raw = pi->readAll();
+					dIn += raw[0] << 5;
+					return dIn;
+				}
+				else
+					// ERROR
+					return -5;
+			}
+			else
+				// ERROR
+				return -4;
+		}
+		else if((raw[0] & 0x0F) == 0x00)
+		{
+			dIn += raw[0] >> 4;
+			return dIn;
+		}
+		else
+			// ERROR
+			return -2;
+		dIn += raw[2] << 12;
 	}
 	else
+		// ERROR
 		return -1;
 }
 
